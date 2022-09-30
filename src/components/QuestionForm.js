@@ -10,6 +10,38 @@ function QuestionForm(props) {
     correctIndex: 0,
   });
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    // console.log("formData:", formData)
+    // console.log(formData);
+
+    //. Creating questionData to be posted
+    // const questionData = {
+    // prompt: "",
+    // answer1: "",
+    // answer2: "",
+    // answer3: "",
+    // answer4: "",
+    // correctIndex: 0,
+    // }
+    // console.log(questionData)
+
+    //4. fetch request
+    fetch("http://localhost:4000/questions", {
+      method: "POST",
+      headers: {
+        "Content-Type":
+        "application/json",
+      },
+      body: JSON.stringify(formData)
+
+    })
+    // after submission, update  the state in
+    .then((response)=> response.json())
+    .then((newQuestion) => console.log(newQuestion))
+
+  }
+
   function handleChange(event) {
     setFormData({
       ...formData,
@@ -17,10 +49,10 @@ function QuestionForm(props) {
     });
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log(formData);
-  }
+  // function handleSubmit(event) {
+  //   event.preventDefault();
+  //   console.log(formData);
+  // }
 
   return (
     <section>
