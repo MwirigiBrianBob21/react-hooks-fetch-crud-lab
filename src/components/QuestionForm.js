@@ -12,18 +12,21 @@ function QuestionForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    
     // console.log("formData:", formData)
     // console.log(formData);
 
     //. Creating questionData to be posted
-    // const questionData = {
-    // prompt: "",
-    // answer1: "",
-    // answer2: "",
-    // answer3: "",
-    // answer4: "",
-    // correctIndex: 0,
-    // }
+    const questionData = {
+    prompt: formData.prompt,
+    answers: [
+      formData.answer1,
+      formData.answer2,
+      formData.answer3,
+      formData.answer4
+    ],
+    correctIndex: parseInt(formData.correctIndex),
+    }
     // console.log(questionData)
 
     //4. fetch request
@@ -33,14 +36,13 @@ function QuestionForm(props) {
         "Content-Type":
         "application/json",
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(questionData)
 
     })
-    // after submission, update  the state in
-    .then((response)=> response.json())
-    .then((newQuestion) => console.log(newQuestion))
+    
 
   }
+
 
   function handleChange(event) {
     setFormData({
